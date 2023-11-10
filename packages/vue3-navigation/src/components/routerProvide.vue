@@ -1,6 +1,6 @@
 <script lang="ts">
 import { reactive, provide, defineComponent, toRef } from "vue";
-import { RouterProvideKey } from "./provideTypes";
+import { RouterProvideKey } from "../provideTypes";
 
 export default defineComponent({
   name: "RouterProvide",

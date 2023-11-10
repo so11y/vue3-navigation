@@ -14,7 +14,7 @@ function hasBubbleProvide(): ProvideTypes {
   };
 }
 
-export function useKeepAlive() {
+export function useKeepAliveViews() {
   const ctx = getCurrentInstance()!;
   const { dept, bubble: parentBubble } = hasBubbleProvide();
   const { routerMap, getRouter, deleteRouter } = inject(RouterProvideKey)!;
