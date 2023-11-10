@@ -7,4 +7,4 @@ export const RouterProvideKey = Symbol("RouterProvideKey") as InjectionKey<{
   routerMap: Record<number, Array<string>>;
 }>;
 
-export const ProvidePageKeepAliveKep = Symbol() as InjectionKey<ProvideTypes>;
+export const ProvidePageKeepAliveKey = Symbol() as InjectionKey<ProvideTypes>;

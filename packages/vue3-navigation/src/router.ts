@@ -13,13 +13,13 @@ import {
   Router,
   RouteLocationNormalizedLoaded,
 } from "vue-router";
-import { RouterProvideKey, ProvidePageKeepAliveKep } from "./provideTypes";
-import type { ProvideTypes } from "../vue-types";
+import { RouterProvideKey, ProvidePageKeepAliveKey } from "./provideTypes";
+import { ProvideTypes } from "../vue-types";
 
 function hasBubbleProvide(): ProvideTypes {
   const ctx = getCurrentInstance()!;
-  if ((ProvidePageKeepAliveKep as symbol) in ctx.parent!.provides) {
-    return ctx.parent?.provides[ProvidePageKeepAliveKep as symbol];
+  if ((ProvidePageKeepAliveKey as symbol) in ctx.parent!.provides) {
+    return ctx.parent?.provides[ProvidePageKeepAliveKey as symbol];
   }
   return {
     dept: -1,
@@ -41,7 +41,7 @@ export function useKeepAliveViews(): Ref<string[]> {
     }
     parentBubble();
   };
-  provide(ProvidePageKeepAliveKep, {
+  provide(ProvidePageKeepAliveKey, {
     bubble,
     dept: currentDept,
   });
@@ -53,7 +53,7 @@ export function useRouter(): Router {
   const router = useVueRouter();
   const { getRouter } = inject(RouterProvideKey)!;
   const ctx = getCurrentInstance()!;
-  const { bubble } = ctx.provides[ProvidePageKeepAliveKep as symbol] as {
+  const { bubble } = ctx.provides[ProvidePageKeepAliveKey as symbol] as {
     bubble: () => void;
   };
   const localSelf = (kill: boolean) => {
