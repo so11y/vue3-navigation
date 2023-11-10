@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "./dist/vue3-navigation.mjs",
+  "types":"./dist/index.d.ts",
   "exports":{
     ".":{
       "import":"./dist/vue3-navigation.mjs",
