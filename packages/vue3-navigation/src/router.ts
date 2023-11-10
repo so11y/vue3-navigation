@@ -1,20 +1,12 @@
-import {
-  provide,
-  InjectionKey,
-  inject,
-  getCurrentInstance,
-  onUnmounted,
-  unref,
-} from "vue";
+import { provide, inject, getCurrentInstance, onUnmounted, unref } from "vue";
 import { useRouter as useVueRouter, RouteLocationRaw } from "vue-router";
-import { RouterProvideKey } from "./helper";
+import { RouterProvideKey, ProvidePageKeepAliveKep } from "./provideTypes";
 import type { ProvideTypes } from "../vue-types";
 
-const providePageKeepAlive = Symbol() as InjectionKey<ProvideTypes>;
 function hasBubbleProvide(): ProvideTypes {
   const ctx = getCurrentInstance()!;
-  if ((providePageKeepAlive as symbol) in ctx.parent!.provides) {
-    return ctx.parent?.provides[providePageKeepAlive as symbol];
+  if ((ProvidePageKeepAliveKep as symbol) in ctx.parent!.provides) {
+    return ctx.parent?.provides[ProvidePageKeepAliveKep as symbol];
   }
   return {
     dept: -1,
@@ -22,7 +14,7 @@ function hasBubbleProvide(): ProvideTypes {
   };
 }
 
-export const useKeepAlive = () => {
+export function useKeepAlive() {
   const ctx = getCurrentInstance()!;
   const { dept, bubble: parentBubble } = hasBubbleProvide();
   const { routerMap, getRouter, deleteRouter } = inject(RouterProvideKey)!;
@@ -36,30 +28,29 @@ export const useKeepAlive = () => {
     }
     parentBubble();
   };
-  provide(providePageKeepAlive, {
+  provide(ProvidePageKeepAliveKep, {
     bubble,
     dept: currentDept,
   });
   onUnmounted(() => deleteRouter(currentDept));
   return getRouter(currentDept);
-};
+}
 
-export const useRouter = () => {
+export function useRouter() {
   const router = useVueRouter();
   const { getRouter } = inject(RouterProvideKey)!;
-  const { dept } = inject(providePageKeepAlive)!;
   const ctx = getCurrentInstance()!;
-  const views = unref(getRouter(dept));
-  const { bubble } = ctx.provides[providePageKeepAlive as symbol] as {
+  const { bubble } = ctx.provides[ProvidePageKeepAliveKep as symbol] as {
     bubble: () => void;
   };
   const localSelf = (kill: boolean) => {
-    const name = router.currentRoute.value.name as string;
+    const { name, matched } = router.currentRoute.value;
+    const views = unref(getRouter(matched.length - 1));
     const index = views.findIndex((pageName) => pageName === name);
     if (kill) {
       views.splice(index, 1);
     } else if (index === -1 && name) {
-      views.push(name);
+      views.push(name as string);
     }
   };
   const killMaybeLinkPage = (to: RouteLocationRaw) => {
@@ -71,17 +62,24 @@ export const useRouter = () => {
       toPageViews.splice(index, 1);
     }
   };
+  const handleRouterAction = (to: RouteLocationRaw, kill = false) => {
+    bubble();
+    localSelf(kill);
+    killMaybeLinkPage(to);
+  };
   return {
+    ...router,
     push(to: RouteLocationRaw, kill = false) {
-      bubble();
-      localSelf(kill);
-      killMaybeLinkPage(to);
+      handleRouterAction(to, kill);
       return router.push(to);
     },
     replace(to: RouteLocationRaw) {
-      localSelf(true);
-      killMaybeLinkPage(to);
+      handleRouterAction(to, true);
       return router.replace(to);
     },
   };
-};
+}
+
+export function useRoute() {
+  return useRoute();
+}
