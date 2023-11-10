@@ -16,6 +16,8 @@ import {
 import { RouterProvideKey, ProvidePageKeepAliveKey } from "./provideTypes";
 import { ProvideTypes } from "../vue-types";
 
+function NOOP() {}
+
 function hasBubbleProvide(): ProvideTypes {
   const ctx = getCurrentInstance()!;
   if ((ProvidePageKeepAliveKey as symbol) in ctx.parent!.provides) {
@@ -23,7 +25,7 @@ function hasBubbleProvide(): ProvideTypes {
   }
   return {
     dept: -1,
-    bubble: () => {},
+    bubble: NOOP,
   };
 }
 
