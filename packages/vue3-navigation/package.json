@@ -2,13 +2,20 @@
   "name": "vue3-navigation",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/index.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "./dist/vue3-navigation.mjs",
+  "exports":{
+    ".":{
+      "import":"./dist/vue3-navigation.mjs",
+      "require":"./dist/vue3-navigation.umd.js"
+    }
   },
   "devDependencies": {
-    "vue": "^3.3.8",
+    "@types/node": "^20.9.0",
+    "@vitejs/plugin-vue": "^3.2.0",
     "typescript": "^4.6.4",
+    "vite": "^3.2.3",
+    "vite-plugin-dts": "^3.6.3",
+    "vue": "^3.3.8",
     "vue-router": "^4.2.5"
   },
   "author": "",

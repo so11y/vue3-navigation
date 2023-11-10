@@ -1,5 +1,18 @@
-import { provide, inject, getCurrentInstance, onUnmounted, unref } from "vue";
-import { useRouter as useVueRouter, RouteLocationRaw } from "vue-router";
+import {
+  provide,
+  inject,
+  getCurrentInstance,
+  onUnmounted,
+  unref,
+  Ref,
+} from "vue";
+import {
+  useRouter as useVueRouter,
+  useRoute as useVueRoute,
+  RouteLocationRaw,
+  Router,
+  RouteLocationNormalizedLoaded,
+} from "vue-router";
 import { RouterProvideKey, ProvidePageKeepAliveKep } from "./provideTypes";
 import type { ProvideTypes } from "../vue-types";
 
@@ -14,7 +27,7 @@ function hasBubbleProvide(): ProvideTypes {
   };
 }
 
-export function useKeepAliveViews() {
+export function useKeepAliveViews(): Ref<string[]> {
   const ctx = getCurrentInstance()!;
   const { dept, bubble: parentBubble } = hasBubbleProvide();
   const { routerMap, getRouter, deleteRouter } = inject(RouterProvideKey)!;
@@ -36,7 +49,7 @@ export function useKeepAliveViews() {
   return getRouter(currentDept);
 }
 
-export function useRouter() {
+export function useRouter(): Router {
   const router = useVueRouter();
   const { getRouter } = inject(RouterProvideKey)!;
   const ctx = getCurrentInstance()!;
@@ -80,6 +93,6 @@ export function useRouter() {
   };
 }
 
-export function useRoute() {
-  return useRoute();
+export function useRoute(): RouteLocationNormalizedLoaded {
+  return useVueRoute();
 }
