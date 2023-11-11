@@ -8,8 +8,9 @@ import {
   NRadioGroup,
   NRadio,
   NSpace,
+  useNotification,
 } from "naive-ui";
-import { ref } from "vue";
+import { onMounted, ref, unref } from "vue";
 import { user } from "../../mock";
 import { useRouter } from "vue3-navigation";
 defineOptions({
@@ -34,19 +35,51 @@ const rules = {
   },
 };
 const formRef = ref<FormInst | null>(null);
-const formValue = ref({
-  name: "",
-  age: "",
-  sex: "",
-});
 
+function builderForm() {
+  const hasId = router.currentRoute.value.query;
+  if (hasId.id) {
+    const mockSource = unref(user).find(
+      (item: any) => item.id === Number(hasId.id)
+    );
+    return {
+      ...mockSource,
+      age: mockSource.age.toString(),
+    };
+  }
+  return {
+    name: "",
+    age: "",
+    sex: "",
+  };
+}
+const formValue = ref(builderForm());
+const notification = useNotification();
+onMounted(() => {
+  notification.success({
+    content: "可以尝试直接浏览器回退，或者提交表单可以查看缓存状态",
+    meta: "",
+    duration: 2500,
+    keepAliveOnHover: true,
+  });
+});
 function handleValidateClick(e: MouseEvent) {
   e.preventDefault();
   formRef.value?.validate((errors) => {
-    user.value.push({
-      id: user.value.length + 1,
-      ...formValue.value,
-    });
+    if (errors?.length) return;
+    if (user.value.id !== undefined) {
+      user.value.push({
+        id: user.value.length + 1,
+        ...formValue.value,
+      });
+    } else {
+      Object.assign(
+        user.value.find(
+          (item: any) => item.id === Number(router.currentRoute.value.query.id)
+        ),
+        formValue.value
+      );
+    }
     router.replace("/user/userList");
   });
 }
@@ -75,11 +108,9 @@ function handleValidateClick(e: MouseEvent) {
         </n-radio-group>
       </n-form-item>
       <n-form-item>
-        <n-button attr-type="button" @click="router.back()">
-          后退
-        </n-button>
+        <n-button attr-type="button" @click="router.back()"> 后退 </n-button>
         <n-button attr-type="button" @click="handleValidateClick">
-          新增
+          {{ formValue.id ? "编辑" : "新增" }}
         </n-button>
       </n-form-item>
     </n-form>

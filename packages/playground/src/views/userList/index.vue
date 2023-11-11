@@ -22,16 +22,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onActivated, onMounted, ref } from "vue";
 import {
   NButton,
-  useMessage,
   NDataTable,
   NRow,
   NCol,
   NInput,
   DataTableInst,
   NButtonGroup,
+  useNotification,
 } from "naive-ui";
 import { user as userData } from "../../mock";
 import { createColumns, Song } from "./helper";
@@ -40,18 +40,35 @@ import { useRouter } from "vue3-navigation";
 defineOptions({
   name: "userList",
 });
+const notification = useNotification();
 const router = useRouter();
 const filterInput = ref("");
 const tableRef = ref<DataTableInst>();
 
-const message = useMessage();
 const columns = ref(
   createColumns({
-    play(row: Song) {
-      message.info(`Play ${row.name}`);
+    edit(row: Song) {
+      router.push(`/user/operate-user?id=${row.id}`);
     },
   })
 );
+onActivated(() => {
+  notification.success({
+    content: "当前列表界面是已缓存",
+    meta: "",
+    duration: 2500,
+    keepAliveOnHover: true,
+  });
+});
+
+onMounted(() => {
+  notification.success({
+    content: "当前界面是新渲染",
+    meta: "",
+    duration: 2500,
+    keepAliveOnHover: true,
+  });
+});
 
 function handleFilter() {
   tableRef.value!.filter({

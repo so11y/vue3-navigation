@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build":"pnpm -F vue3-navigation run build"
+    "preinstall": "pnpm i && pnpm run build",
+    "build": "pnpm -F vue3-navigation run build",
+    "dev": "pnpm -F playground run dev"
   }
 }

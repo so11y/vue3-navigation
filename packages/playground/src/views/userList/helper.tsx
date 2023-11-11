@@ -8,9 +8,9 @@ export type Song = {
 };
 
 export const createColumns = ({
-  play,
+  edit,
 }: {
-  play: (row: Song) => void;
+  edit: (row: Song) => void;
 }): DataTableColumns<Song> => {
   return [
     {
@@ -37,8 +37,8 @@ export const createColumns = ({
       key: "actions",
       render(row) {
         return (
-          <NButton strong tertiary size="small" onClick={() => play(row)}>
-            Play
+          <NButton strong tertiary size="small" onClick={() => edit(row)}>
+            编辑
           </NButton>
         );
       },
