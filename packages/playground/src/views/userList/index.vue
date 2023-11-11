@@ -7,19 +7,22 @@
       />
     </n-col>
     <n-col>
-      <n-button @click="handleFilter">搜索</n-button>
+      <n-button-group>
+        <n-button @click="handleFilter">搜索</n-button>
+        <n-button @click="handleCreate">新增</n-button>
+      </n-button-group>
     </n-col>
   </n-row>
   <n-data-table
     ref="tableRef"
     :columns="columns"
-    :data="user.list"
+    :data="userData"
     :bordered="false"
   />
 </template>
 
-<script setup lang="ts">
-import { h, ref } from "vue";
+<script setup lang="tsx">
+import { ref } from "vue";
 import {
   NButton,
   useMessage,
@@ -28,79 +31,34 @@ import {
   NCol,
   NInput,
   DataTableInst,
+  NButtonGroup,
 } from "naive-ui";
-import type { DataTableColumns } from "naive-ui";
-import { user } from "../../mock";
+import { user as userData } from "../../mock";
+import { createColumns, Song } from "./helper";
+import { useRouter } from "vue3-navigation";
 
-console.log(user);
 defineOptions({
   name: "userList",
 });
+const router = useRouter();
 const filterInput = ref("");
 const tableRef = ref<DataTableInst>();
 
-type Song = {
-  no: number;
-  title: string;
-  length: string;
-};
-
-const createColumns = ({
-  play,
-}: {
-  play: (row: Song) => void;
-}): DataTableColumns<Song> => {
-  return [
-    {
-      title: "id",
-      key: "id",
+const message = useMessage();
+const columns = ref(
+  createColumns({
+    play(row: Song) {
+      message.info(`Play ${row.name}`);
     },
-    {
-      title: "name",
-      key: "name",
-      filter(value, row) {
-        return row.title.indexOf(value.toString()) > -1;
-      },
-    },
-    {
-      title: "age",
-      key: "age",
-    },
-    {
-      title: "sex",
-      key: "sex",
-    },
-    {
-      title: "Action",
-      key: "actions",
-      render(row) {
-        return h(
-          NButton,
-          {
-            strong: true,
-            tertiary: true,
-            size: "small",
-            onClick: () => play(row),
-          },
-          { default: () => "Play" }
-        );
-      },
-    },
-  ];
-};
+  })
+);
 
 function handleFilter() {
   tableRef.value!.filter({
     name: [filterInput.value],
   });
 }
-
-const message = useMessage();
-const columns = ref(
-  createColumns({
-    play(row: Song) {
-      message.info(`Play ${row.title}`);
-    },
-  })
-);
+function handleCreate() {
+  router.push("/user/operate-user");
+}
 </script>

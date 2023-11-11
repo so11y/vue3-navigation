@@ -10,7 +10,7 @@ defineOptions({
 function buildMenu(router: Array<RouteRecordRaw>): Array<MenuOption> {
   const walk = (router: Array<RouteRecordRaw>): Array<MenuOption> => {
     return router
-      .filter((item) => item.name)
+      .filter((item) => item.meta?.title)
       .map((item) => {
         const menu: MenuOption = {
           label: () =>
@@ -21,7 +21,7 @@ function buildMenu(router: Array<RouteRecordRaw>): Array<MenuOption> {
                   path: item.path,
                 },
               },
-              { default: () => item.name }
+              { default: () => item.meta?.title }
             ),
           key: item.path,
         };
@@ -73,6 +73,10 @@ const menuOptions = buildMenu(RouterList);
   }
   .body {
     padding: 8px 8px 0 208px;
+    box-sizing: border-box;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>

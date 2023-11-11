@@ -9,6 +9,7 @@
   "devDependencies": {
     "@types/mockjs": "^1.0.10",
     "@vitejs/plugin-vue": "^3.2.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.2",
     "mockjs": "^1.1.0",
     "naive-ui": "^2.35.0",
     "sass": "^1.69.5",
