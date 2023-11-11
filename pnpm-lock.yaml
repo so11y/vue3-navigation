@@ -7,7 +7,9 @@ importers:
 
   packages/playground:
     specifiers:
+      '@types/mockjs': ^1.0.10
       '@vitejs/plugin-vue': ^3.2.0
+      mockjs: ^1.1.0
       naive-ui: ^2.35.0
       sass: ^1.69.5
       typescript: ^4.6.4
@@ -19,7 +21,9 @@ importers:
     dependencies:
       vue3-navigation: link:../vue3-navigation
     devDependencies:
+      '@types/mockjs': 1.0.10
       '@vitejs/plugin-vue': 3.2.0_vite@3.2.7+vue@3.3.8
+      mockjs: 1.1.0
       naive-ui: 2.35.0_vue@3.3.8
       sass: 1.69.5
       typescript: 4.9.5
@@ -241,6 +245,10 @@ packages:
     resolution: {integrity: sha512-y9euML0cim1JrykNxADLfaG0FgD1g/yTHwUs/Jg9ZIU7WKj2/4IW9Lbb1WZbvck78W/lfGXFfe+u2EGfIJXdLQ==}
     dev: true
 
+  /@types/mockjs/1.0.10:
+    resolution: {integrity: sha512-SXgrhajHG7boLv6oU93CcmdDm0HYRiceuz6b+7z+/2lCJPTWDv0V5YiwFHT2ejE4bQqgSXQiVPQYPWv7LGsK1g==}
+    dev: true
+
   /@types/node/20.9.0:
     resolution: {integrity: sha512-nekiGu2NDb1BcVofVcEKMIwzlx4NjHlcjhoxxKBNLtz15Y1z7MYf549DFvkHSId02Ax6kGwWntIBPC3l/JZcmw==}
     dependencies:
@@ -457,7 +465,6 @@ packages:
     engines: {node: ^12.20.0 || >=14}
     requiresBuild: true
     dev: true
-    optional: true
 
   /computeds/0.0.1:
     resolution: {integrity: sha512-7CEBgcMjVmitjYo5q8JTJVra6X5mQ20uTThdK+0kR7UEaDrAWEQcRiBtWJzga4eRpP6afNwwLsX2SET2JhVB1Q==}
@@ -883,6 +890,13 @@ packages:
     engines: {node: '>=16 || 14 >=14.17'}
     dependencies:
       brace-expansion: 2.0.1
+    dev: true
+
+  /mockjs/1.1.0:
+    resolution: {integrity: sha512-eQsKcWzIaZzEZ07NuEyO4Nw65g0hdWAyurVol1IPl1gahRwY+svqzfgfey8U8dahLwG44d6/RwEzuK52rSa/JQ==}
+    hasBin: true
+    dependencies:
+      commander: 9.5.0
     dev: true
 
   /ms/2.1.2:

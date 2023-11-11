@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@types/mockjs": "^1.0.10",
     "@vitejs/plugin-vue": "^3.2.0",
+    "mockjs": "^1.1.0",
     "naive-ui": "^2.35.0",
     "sass": "^1.69.5",
     "typescript": "^4.6.4",

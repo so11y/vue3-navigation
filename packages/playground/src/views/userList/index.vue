@@ -1,7 +1,10 @@
 <template>
   <n-row :gutter="8">
     <n-col :span="12">
-      <n-input placeholder="过滤文本后进行界面跳转查看缓存状态" v-model:value="filterInput" />
+      <n-input
+        placeholder="过滤文本后进行界面跳转查看缓存状态"
+        v-model:value="filterInput"
+      />
     </n-col>
     <n-col>
       <n-button @click="handleFilter">搜索</n-button>
@@ -10,7 +13,7 @@
   <n-data-table
     ref="tableRef"
     :columns="columns"
-    :data="data"
+    :data="user.list"
     :bordered="false"
   />
 </template>
@@ -27,7 +30,9 @@ import {
   DataTableInst,
 } from "naive-ui";
 import type { DataTableColumns } from "naive-ui";
+import { user } from "../../mock";
 
+console.log(user);
 defineOptions({
   name: "userList",
 });
@@ -47,19 +52,23 @@ const createColumns = ({
 }): DataTableColumns<Song> => {
   return [
     {
-      title: "No",
-      key: "no",
+      title: "id",
+      key: "id",
     },
     {
-      title: "Title",
-      key: "title",
+      title: "name",
+      key: "name",
       filter(value, row) {
         return row.title.indexOf(value.toString()) > -1;
       },
     },
     {
-      title: "Length",
-      key: "length",
+      title: "age",
+      key: "age",
+    },
+    {
+      title: "sex",
+      key: "sex",
     },
     {
       title: "Action",
@@ -80,14 +89,9 @@ const createColumns = ({
   ];
 };
 
-const data: Song[] = [
-  { no: 3, title: "Wonderwall", length: "4:18" },
-  { no: 4, title: "London", length: "4:48" },
-  { no: 12, title: "Champagne Supernova", length: "7:27" },
-];
 function handleFilter() {
   tableRef.value!.filter({
-    title: [filterInput.value],
+    name: [filterInput.value],
   });
 }
 
