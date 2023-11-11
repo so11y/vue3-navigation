@@ -61,7 +61,7 @@ function handleClick(){
   //那么a在调用完成router.push之后会缓存当前a界面
   //并且b界面如果已经被缓存，会重新渲染新的b界面
   router.push("/b");
-  //router.replace同理
+  //router.replace将会不缓存页面其他同理
   router.replace("/b");
 }
 ```

@@ -3,6 +3,13 @@
   "version": "0.0.0",
   "type": "module",
   "license": "MIT",
+  "keywords": [
+    "vue",
+    "vue3",
+    "vue-router",
+    "keep-alive",
+    "navigation"
+  ],
   "description": "这是一个基于 Vue 3 的 KeepAlive 实现的路由页面导航系统，支持前进刷新和后退缓存",
   "homepage": "https://github.com/so11y/vue3-navigation",
   "scripts": {

@@ -6,6 +6,13 @@
   "types": "./dist/index.d.ts",
   "homepage": "https://github.com/so11y/vue3-navigation",
   "license": "MIT",
+  "keywords": [
+    "vue",
+    "vue3",
+    "vue-router",
+    "keep-alive",
+    "navigation"
+  ],
   "scripts": {
     "build": "vite build"
   },
