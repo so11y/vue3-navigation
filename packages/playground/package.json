@@ -1,8 +1,9 @@
 {
   "name": "playground",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
+  "description": "这是一个基于 Vue 3 的 KeepAlive 实现的路由页面导航系统，支持前进刷新和后退缓存",
+  "homepage": "https://github.com/so11y/vue3-navigation",
   "scripts": {
     "dev": "vite"
   },
@@ -19,9 +20,13 @@
     "vue-router": "^4.2.5",
     "vue-tsc": "^1.0.9"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "vue3-navigation": "workspace:^"
-  }
+  },
+  "author": {
+    "name": "zrrz",
+    "email": "247076126@qq.com"
+  },
+  "npmClient": "pnpm"
 }

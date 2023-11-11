@@ -1,16 +1,88 @@
-# Vue 3 + TypeScript + Vite
+# Vue 3 路由导航
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+这是一个基于 Vue 3 的 KeepAlive 实现的路由页面导航系统，支持前进刷新和后退缓存。
 
-## Recommended IDE Setup
+## 功能特性
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+- 前进刷新
+- 后退缓存
+- 提供与 vue-router 同等 api 使用方式
 
-## Type Support For `.vue` Imports in TS
+## 注意
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+- RouterView 替换为 NavigateView
+- RouterLink 替换为 NavigateLink
+- useRouter 和 useRoute 从 vue3-navigation 中导入
+- 界面级别路由需要与定义name并于对应路由中name相互对应
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+```typescript
+[
+  {
+    path: "/login",
+    name: "login", //这里的login需要与缓存界面级别组件的name相互对应
+    component: () => import("./views/login.vue"),
+  },
+];
+```
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+```javascript
+export default defineComponent({
+  name: "login", //这个组件是页面组件需要与路由中定义的name相互对应
+});
+```
+
+
+## 使用前必要改造
+
+```javascript
+//createApp使用部位需要进改造
+import { createApp, h } from "vue";
+import { RouterProvide } from "vue3-navigation";
+import App from "./App.vue";
+const app = createApp({
+  render: () =>
+    h(RouterProvide, null, {
+      default: () => h(App),
+    }),
+});
+```
+
+## 前进缓存
+```javascript
+import { useRouter } from "vue3-navigation";
+
+const router = useRouter();
+
+function handleClick(){
+  //调用push时将会把form缓存
+  //比如当前是A路由，从a前往b界面
+  //那么a在调用完成router.push之后会缓存当前a界面
+  //并且b界面如果已经被缓存，会重新渲染新的b界面
+  router.push("/b");
+  //router.replace同理
+  router.replace("/b");
+}
+```
+
+## api介绍
+
+#### router.push(RouteLocationRaw,isKill = false)
+
+#### router.replace(RouteLocationRaw,isKill = true)
+
+- RouteLocationRaw是vue-router的跳转参数类型
+- isKill是是是否缓存当前界面，默认是缓存 false
+
+
+## 安装
+
+```bash
+npm install vue3-navigation --save
+```
+
+
+### 如何运行本项目
+- 对项目可以进行fork或者clone到然后执行以下操作
+- pnpm i
+- pnpm run dev
+- 将会运行playground进行体验
