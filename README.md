@@ -10,13 +10,14 @@
 
 ## 注意
 
-- 不可以有两个同级的NavigateView会有意向不到的意外
+- 不可以有两个同级的NavigateView会有意想不到的意外
+- 界面级别路由一定要定义name并与对应路由中name相互对应以下是示例
 
 ```typescript
 [
   {
     path: "/login",
-    name: "login", //这里的login需要与缓存界面级别组件的name相互对应
+    name: "login", //这里的login一定要与缓存界面级别组件的name相互对应
     component: () => import("./views/login.vue"),
   },
 ];
