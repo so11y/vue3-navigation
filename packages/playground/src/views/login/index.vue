@@ -1,21 +1,27 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue3-navigation";
-import { NInput, NButton } from "naive-ui";
+import { NInput, NButton, useNotification } from "naive-ui";
 defineOptions({
   name: "login",
 });
-
+const notification = useNotification();
 const router = useRouter();
 
 const username = ref("");
 const password = ref("");
 
+onMounted(() => {
+  notification.success({
+    content: "只是用于模拟真实场景,可直接登录",
+    meta: 'vue3-navigation',
+    duration: 2500,
+    keepAliveOnHover: true,
+  });
+});
+
 function login() {
-  console.log("---")
-  if (username.value === "admin" && password.value === "123456") {
-    router.push("/user/userList");
-  }
+  router.push("/user/userList");
 }
 </script>
 

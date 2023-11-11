@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NavigateView } from "vue3-navigation";
-import { NMessageProvider } from "naive-ui";
+import { NMessageProvider, NNotificationProvider } from "naive-ui";
 
 defineOptions({
   name: "App",
@@ -8,9 +8,11 @@ defineOptions({
 </script>
 
 <template>
-  <NMessageProvider>
-    <NavigateView name="App" />
-  </NMessageProvider>
+  <NNotificationProvider>
+    <NMessageProvider>
+      <NavigateView name="App" />
+    </NMessageProvider>
+  </NNotificationProvider>
 </template>
 <style lang="scss">
 * {
