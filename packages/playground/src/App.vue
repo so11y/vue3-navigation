@@ -10,7 +10,7 @@ defineOptions({
 <template>
   <NNotificationProvider>
     <NMessageProvider>
-      <NavigateView name="App" />
+      <NavigateView name="App" :exclude="['login']"/>
     </NMessageProvider>
   </NNotificationProvider>
 </template>

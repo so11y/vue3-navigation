@@ -21,7 +21,7 @@
   />
 </template>
 
-<script setup lang="tsx">
+<script setup lang="ts">
 import { ref } from "vue";
 import {
   NButton,
