@@ -4,26 +4,19 @@
   </a>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType, h } from "vue";
+<script lang="ts" setup>
 import { RouteLocationRaw } from "vue-router";
 import { useRouter } from "../router";
-export default defineComponent({
+defineOptions({
   name: "NavigateLink",
-  props: {
-    to: {
-      type: [Object, String] as PropType<RouteLocationRaw>,
-      required: true,
-    },
-  },
-  setup({ to }, { slots }) {
-    const router = useRouter();
-    return {
-      handleTo(e: MouseEvent) {
-        e.preventDefault();
-        router.push(to);
-      },
-    };
-  },
 });
+const props = defineProps<{
+  to: RouteLocationRaw;
+}>();
+const router = useRouter();
+
+function handleTo(e: MouseEvent) {
+  e.preventDefault();
+  router.push(props.to);
+}
 </script>
