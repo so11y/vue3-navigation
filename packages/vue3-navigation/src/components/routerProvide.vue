@@ -13,10 +13,11 @@ export default defineComponent({
   name: "RouterProvide",
   setup: (_, { slots }) => {
     const provideDeptMap = reactive<Record<number, Array<string>>>({});
-    const navigateViewConfigRawMap = reactive<
-      Record<number, ComputedRef<NavigateViewConfigRaw>>
-    >({});
-    const navigateBubbleMap = reactive<Record<number, () => void>>({});
+    const navigateViewConfigRawMap: Record<
+      number,
+      ComputedRef<NavigateViewConfigRaw>
+    > = {};
+    const navigateBubbleMap: Record<number, () => void> = {};
     const provideSource = {
       routerMap: provideDeptMap,
       navigateBubbleMap,
@@ -38,6 +39,7 @@ export default defineComponent({
       deleteRouter(deptId: number) {
         Reflect.deleteProperty(provideDeptMap, deptId);
         Reflect.deleteProperty(navigateViewConfigRawMap, deptId);
+        Reflect.deleteProperty(navigateBubbleMap, deptId);
       },
     };
     provide(RouterProvideKey, provideSource);
