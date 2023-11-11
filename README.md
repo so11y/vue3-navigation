@@ -77,7 +77,8 @@ function handleClick(){
 
 
 ## 安装
-
+- 暂时未发包,测试用例完善后发包
+- 如果想提前使用可以clone本项目然后运行playground进行体验
 ```bash
 npm install vue3-navigation --save
 ```
