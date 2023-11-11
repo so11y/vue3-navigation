@@ -14,6 +14,7 @@
 - RouterLink 替换为 NavigateLink
 - useRouter 和 useRoute 从 vue3-navigation 中导入
 - 界面级别路由需要与定义name并于对应路由中name相互对应
+- 不可以有两个同级的NavigateView会有意向不到的意外
 
 ```typescript
 [
