@@ -69,9 +69,10 @@ const menuOptions = buildMenu(RouterList);
     width: 200px;
     height: 100%;
     border-right: 1px solid #999;
+    box-sizing: border-box;
   }
   .body {
-    padding-left: 200px;
+    padding: 8px 8px 0 208px;
   }
 }
 </style>
