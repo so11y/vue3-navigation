@@ -68,7 +68,7 @@ export function useRouter(): Router {
     const views = unref(getRouter(dept));
     const index = views.findIndex((pageName) => pageName === name);
     const bubble = navigateBubbleMap[dept] || NOOP;
-    if (canOperatePage(name as string, index)) {
+    if (canOperatePage(name as string, dept)) {
       if (kill) {
         views.splice(index, 1);
       } else if (index === -1 && name) {
