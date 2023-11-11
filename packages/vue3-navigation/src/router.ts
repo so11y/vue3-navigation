@@ -17,23 +17,11 @@ import {
 import {
   RouterProvideKey,
   ProvidePageKeepAliveKey,
-  ProvideTypes,
   NavigateViewConfigRaw,
 } from "./types";
+import { NOOP, findRedirectName, hasBubbleProvide } from "./helper";
 
-function NOOP() {}
-
-function hasBubbleProvide(): Omit<ProvideTypes, "props"> {
-  const ctx = getCurrentInstance()!;
-  if ((ProvidePageKeepAliveKey as symbol) in ctx.parent!.provides) {
-    return ctx.parent?.provides[ProvidePageKeepAliveKey as symbol];
-  }
-  return {
-    dept: -1,
-  };
-}
-
-export function useKeepAliveViews(name:string): Ref<string[]> {
+export function useKeepAliveViews(name: string): Ref<string[]> {
   const ctx = getCurrentInstance()!;
   const { dept } = hasBubbleProvide();
   const { routerMap, addRouter, deleteRouter, navigateBubbleMap } =
@@ -90,18 +78,14 @@ export function useRouter(): Router {
     }
   };
   const killMaybeLinkPage = (to: RouteLocationRaw) => {
-    //需要检查to的路由是否存在重定向
-    //如果有重定向还需要检查重定向是否还会继续重定向
-    //最终没有重定向的路由才是真正的目标路由
-    //然后把这个路由的name获取出来
-    const toPage = router.resolve(to);
-    const toPageDept = toPage.matched.length - 1;
+    const maybeToPage = router.resolve(to);
+    const toRouteLocation = findRedirectName(maybeToPage, router);
+    const { matched, name } = toRouteLocation;
+    const toPageDept = matched.length - 1;
     const toPageViews = unref(getRouter(toPageDept));
     if (toPageViews) {
-      const index = toPageViews.findIndex(
-        (pageName) => pageName === toPage.name
-      );
-      if (canOperatePage(toPage.name as string, index)) {
+      const index = toPageViews.findIndex((pageName) => pageName === name);
+      if (canOperatePage(name as string, index)) {
         if (index > -1) {
           toPageViews.splice(index, 1);
         }

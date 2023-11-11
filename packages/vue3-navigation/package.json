@@ -9,7 +9,7 @@
   },
   "exports": {
     ".": {
-      "import": "./src/index.ts",
+      "import": "./dist/vue3-navigation.mjs",
       "require": "./dist/vue3-navigation.umd.js"
     }
   },
