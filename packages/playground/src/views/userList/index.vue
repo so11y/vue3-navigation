@@ -7,6 +7,6 @@ defineOptions({
 
 <template>
    <div>
-
+    o1 :<input type="text">
    </div>
 </template>

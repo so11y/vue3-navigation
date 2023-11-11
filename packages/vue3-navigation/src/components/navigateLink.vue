@@ -1,5 +1,11 @@
+<template>
+  <a @click="handleTo">
+    <slot></slot>
+  </a>
+</template>
+
 <script lang="ts">
-import { defineComponent, PropType,h } from "vue";
+import { defineComponent, PropType, h } from "vue";
 import { RouteLocationRaw } from "vue-router";
 import { useRouter } from "../router";
 export default defineComponent({
@@ -12,17 +18,12 @@ export default defineComponent({
   },
   setup({ to }, { slots }) {
     const router = useRouter();
-    return () =>
-      h(
-        "a",
-        {
-          onClick: (e: MouseEvent) => {
-            e.preventDefault();
-            router.push(to);
-          },
-        },
-        slots.default?.()
-      );
+    return {
+      handleTo(e: MouseEvent) {
+        e.preventDefault();
+        router.push(to);
+      },
+    };
   },
 });
 </script>

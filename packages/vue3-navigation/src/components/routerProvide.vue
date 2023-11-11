@@ -1,5 +1,12 @@
 <script lang="ts">
-import { unref,ComputedRef,reactive, provide, defineComponent, toRef } from "vue";
+import {
+  unref,
+  ComputedRef,
+  reactive,
+  provide,
+  defineComponent,
+  toRef,
+} from "vue";
 import { NavigateViewConfigRaw, RouterProvideKey } from "../types";
 
 export default defineComponent({
@@ -9,19 +16,23 @@ export default defineComponent({
     const navigateViewConfigRawMap = reactive<
       Record<number, ComputedRef<NavigateViewConfigRaw>>
     >({});
+    const navigateBubbleMap = reactive<Record<number, () => void>>({});
     const provideSource = {
       routerMap: provideDeptMap,
+      navigateBubbleMap,
       navigateViewConfigRawMap,
       getRouter(deptId: number) {
         return toRef(provideDeptMap, deptId);
       },
       addRouter(
         deptId: number,
-        navigateViewConfigRaw: ComputedRef<NavigateViewConfigRaw>
+        navigateViewConfigRaw: ComputedRef<NavigateViewConfigRaw>,
+        bubble: () => void
       ) {
         const { include = [] } = unref(navigateViewConfigRaw);
         Reflect.set(provideDeptMap, deptId, [...include]);
         Reflect.set(navigateViewConfigRawMap, deptId, navigateViewConfigRaw);
+        Reflect.set(navigateBubbleMap, deptId, bubble);
         return toRef(provideDeptMap, deptId);
       },
       deleteRouter(deptId: number) {

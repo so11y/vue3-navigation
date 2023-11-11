@@ -7,7 +7,7 @@ defineOptions({
 </script>
 
 <template>
-  <NavigateView name="App" :exclude="['login']"/>
+  <NavigateView name="App" />
 </template>
 <style lang="scss">
 * {

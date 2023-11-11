@@ -6,7 +6,7 @@ defineOptions({
   name: "NavigateView",
 });
 
-const props = withDefaults(defineProps<NavigateViewProps>(), {
+const props =  withDefaults(defineProps<NavigateViewProps>(), {
   include: () => [],
   exclude: () => [],
   max: Infinity,
