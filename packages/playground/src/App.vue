@@ -1,26 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useKeepAliveViews, useRouter, RouterView } from "vue3-navigation";
+import { NavigateView } from "vue3-navigation";
 
-const routerName = ref("");
-
-const views = useKeepAliveViews();
-
-const { push } = useRouter();
-
-function pushRouter() {
-  console.log("----F");
-  push(routerName.value);
-  routerName.value = "";
-}
+defineOptions({
+  name: "App",
+});
 </script>
 
 <template>
-  cache:{{ views }}
-  <br />
-  <RouterView />
-
-  <hr />
-  <br />
-  <input type="text" v-model="routerName" @keydown.enter="pushRouter" />
+  <NavigateView name="App" :exclude="['login']"/>
 </template>
+<style lang="scss">
+* {
+  padding: 0;
+  margin: 0;
+}
+</style>

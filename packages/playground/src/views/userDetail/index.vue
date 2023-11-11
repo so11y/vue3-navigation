@@ -1,8 +1,8 @@
 <template>
-    o2 :<input type="text">    
+    o2 :<input type="text">
 </template>
 <script lang="ts" setup>
 defineOptions({
-  name: "o2",
+  name: "userDetail",
 });
 </script>

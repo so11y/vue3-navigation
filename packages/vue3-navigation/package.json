@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "./dist/vue3-navigation.mjs",
-  "types":"./dist/index.d.ts",
-  "exports":{
-    ".":{
-      "import":"./dist/vue3-navigation.mjs",
-      "require":"./dist/vue3-navigation.umd.js"
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "vite build"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/vue3-navigation.mjs",
+      "require": "./dist/vue3-navigation.umd.js"
     }
   },
   "devDependencies": {
