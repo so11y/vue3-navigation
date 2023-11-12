@@ -4,7 +4,6 @@ import dts from "vite-plugin-dts";
 import { resolve } from "path";
 import { fileURLToPath } from "url";
 import { readFile, writeFile } from "fs/promises";
-import { existsSync } from "fs";
 
 function builderREADME(): Plugin {
   return {
