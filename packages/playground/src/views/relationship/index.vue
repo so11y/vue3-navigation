@@ -1,6 +1,10 @@
-<template>o3 :<input type="text" /></template>
 <script lang="ts" setup>
+import { NavigateView } from "vue3-navigation";
 defineOptions({
-  name: "Relationship",
+  name: "relationship",
 });
 </script>
+
+<template>
+  <NavigateView name="relationship" />
+</template>
