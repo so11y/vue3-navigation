@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import { NavigateView, NavigateLink, useRoute } from "vue3-navigation";
+import { NavigateLink } from "vue3-navigation";
 import { RouteRecordRaw } from "vue-router";
 import RouterList from "../router";
-import { MenuOption, NMenu } from "naive-ui";
-import { h, ref, watch } from "vue";
+import { MenuOption } from "naive-ui";
+import { h } from "vue";
+import BasicLayout from "./basicLayout.vue";
+
 defineOptions({
-  name: "Layout",
+  name: "indexLayout",
 });
+
 function buildMenu(router: Array<RouteRecordRaw>): Array<MenuOption> {
   const walk = (router: Array<RouteRecordRaw>): Array<MenuOption> => {
     return router
@@ -24,6 +27,7 @@ function buildMenu(router: Array<RouteRecordRaw>): Array<MenuOption> {
               { default: () => item.meta?.title }
             ),
           key: item.path,
+          show: !item.meta?.hidden
         };
         if (item.children) {
           menu.children = walk(item.children);
@@ -33,50 +37,16 @@ function buildMenu(router: Array<RouteRecordRaw>): Array<MenuOption> {
   };
   return walk(router);
 }
-const route = useRoute();
-const selectedKey = ref<string>("/");
 
-watch(
-  () => route.path,
-  (path) => {
-    selectedKey.value = path;
-  },
-  {
-    immediate:true
-  }
-);
 const menuOptions = buildMenu(RouterList);
 </script>
 
 <template>
-  <div class="main">
-    <div class="nav">
-      <NMenu v-model:value="selectedKey" :options="menuOptions" />
-    </div>
-    <div class="body">
-      <NavigateView name="Layout" />
-    </div>
-  </div>
+  <BasicLayout :menu="menuOptions" name="indexLayout" />
 </template>
+
 <style lang="scss" scoped>
-.main {
-  height: 100vh;
-  position: relative;
-  .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 100%;
-    border-right: 1px solid #999;
-    box-sizing: border-box;
-  }
-  .body {
-    padding: 8px 8px 0 208px;
-    box-sizing: border-box;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
+:deep(.main .nav) {
+  left: 0;
 }
 </style>
