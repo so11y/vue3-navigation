@@ -14,6 +14,7 @@
   "homepage": "https://github.com/so11y/vue3-navigation",
   "scripts": {
     "postinstall": "pnpm run build",
+    "test": "pnpm -F vue3-navigation run test",
     "build": "pnpm -F vue3-navigation run build",
     "dev": "pnpm -F playground run dev"
   },
