@@ -6,6 +6,9 @@
   "types": "./dist/index.d.ts",
   "homepage": "https://github.com/so11y/vue3-navigation",
   "license": "MIT",
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "vue",
     "vue3",
