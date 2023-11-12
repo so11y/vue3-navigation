@@ -34,7 +34,7 @@ import {
   useNotification,
 } from "naive-ui";
 import { user as userData } from "../../mock";
-import { createColumns, Song } from "./helper";
+import { createColumns, User } from "./helper";
 import { useRouter } from "vue3-navigation";
 
 defineOptions({
@@ -47,7 +47,10 @@ const tableRef = ref<DataTableInst>();
 
 const columns = ref(
   createColumns({
-    edit(row: Song) {
+    select(key,row) {
+      router.push(`/user/address-book/${key}?id=${row.id}`);
+    },
+    edit(row: User) {
       router.push(`/user/operate-user?id=${row.id}`);
     },
   })

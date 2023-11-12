@@ -1,6 +1,21 @@
-import { DataTableColumns, NButton } from "naive-ui";
+import { DataTableColumns, NButton, NDropdown, NSpace } from "naive-ui";
 
-export type Song = {
+const operates = [
+  {
+    label: "家庭",
+    key: "family",
+  },
+  {
+    label: "公司",
+    key: "company",
+  },
+  {
+    label: "朋友",
+    key: "friend",
+  },
+];
+
+export type User = {
   id: number;
   name: string;
   age: number;
@@ -9,9 +24,11 @@ export type Song = {
 
 export const createColumns = ({
   edit,
+  select,
 }: {
-  edit: (row: Song) => void;
-}): DataTableColumns<Song> => {
+  edit: (row: User) => void;
+  select: (key:string,row: User) => void;
+}): DataTableColumns<User> => {
   return [
     {
       title: "id",
@@ -37,9 +54,15 @@ export const createColumns = ({
       key: "actions",
       render(row) {
         return (
-          <NButton strong tertiary size="small" onClick={() => edit(row)}>
-            编辑
-          </NButton>
+          <NSpace>
+            <NButton onClick={() => edit(row)}>编辑</NButton>
+            <NDropdown
+              onSelect={(key: string) => select(key, row)}
+              options={operates}
+            >
+              <NButton>关系列表</NButton>
+            </NDropdown>
+          </NSpace>
         );
       },
     },
