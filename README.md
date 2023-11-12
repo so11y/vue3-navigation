@@ -39,11 +39,11 @@ export default defineComponent({
 ```javascript
 //createApp使用部位需要进改造
 import { createApp, h } from "vue";
-import { RouterProvide } from "vue3-navigation";
+import { NavigateProvide } from "vue3-navigation";
 import App from "./App.vue";
 const app = createApp({
   render: () =>
-    h(RouterProvide, null, {
+    h(NavigateProvide, null, {
       default: () => h(App),
     }),
 });

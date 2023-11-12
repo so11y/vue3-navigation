@@ -14,5 +14,6 @@
     "noEmit": false,
     "types": ["./vue-types.d.ts"]
   },
+  "references": [{ "path": "./tsconfig.test.json" }],
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "vite-env.d.ts"]
 }

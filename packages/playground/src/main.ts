@@ -1,5 +1,5 @@
 import { createApp, h } from "vue";
-import { RouterProvide } from "vue3-navigation";
+import { NavigateProvide } from "vue3-navigation";
 import { createRouter, createWebHistory } from "vue-router";
 import RouterList from "./router";
 import App from "./App.vue";
@@ -10,7 +10,7 @@ const crateRouter = createRouter({
 
 const app = createApp({
   render: () =>
-    h(RouterProvide, null, {
+    h(NavigateProvide, null, {
       default: () => h(App),
     }),
 });

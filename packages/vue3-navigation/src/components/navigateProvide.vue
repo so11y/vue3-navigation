@@ -10,7 +10,7 @@ import {
 import { NavigateViewConfigRaw, RouterProvideKey } from "../types";
 
 export default defineComponent({
-  name: "RouterProvide",
+  name: "NavigateProvide",
   setup: (_, { slots }) => {
     const provideDeptMap = reactive<Record<number, Array<string>>>({});
     const navigateViewConfigRawMap: Record<
