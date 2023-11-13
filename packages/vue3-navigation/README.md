@@ -76,6 +76,18 @@ function handleClick(){
 - isKill是是是否缓存当前界面，默认是缓存 false
 
 
+## 组件介绍
+
+```html
+<NavigateView :include="Array<string>" :exclude="Array<string>" :max="number"/>
+```
+
+- include:Array<string> ，因为本身就会缓存了，其实这个属性意义不大，除非某个界面需要完全的持久缓存才使用
+- exclude:Array<string> , 排除一些不需要被缓存的路由
+- max:number, 缓存最大上限个数，默认Infinity
+
+
+
 ## 安装
 ```bash
 npm install vue3-navigation --save

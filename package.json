@@ -1,5 +1,4 @@
 {
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "license": "MIT",
@@ -16,7 +15,8 @@
     "postinstall": "pnpm run build",
     "test": "pnpm -F vue3-navigation run test",
     "build": "pnpm -F vue3-navigation run build",
-    "dev": "pnpm -F playground run dev"
+    "dev": "pnpm -F playground run dev",
+    "publish": "pnpm -F vue3-navigation run publish"
   },
   "author": {
     "name": "zrrz",
