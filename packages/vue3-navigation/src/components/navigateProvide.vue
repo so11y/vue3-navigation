@@ -30,8 +30,7 @@ export default defineComponent({
         navigateViewConfigRaw: ComputedRef<NavigateViewConfigRaw>,
         bubble: () => void
       ) {
-        const { include = [] } = unref(navigateViewConfigRaw);
-        Reflect.set(provideDeptMap, deptId, [...include]);
+        Reflect.set(provideDeptMap, deptId, []);
         Reflect.set(navigateViewConfigRawMap, deptId, navigateViewConfigRaw);
         Reflect.set(navigateBubbleMap, deptId, bubble);
         return toRef(provideDeptMap, deptId);

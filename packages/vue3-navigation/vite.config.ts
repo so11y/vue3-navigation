@@ -9,7 +9,7 @@ function builderREADME(): Plugin {
   return {
     name: "builder-readme",
     apply: "build",
-    async writeBundle(a, b) {
+    async writeBundle() {
       const __dirname = fileURLToPath(import.meta.url);
       const root = searchForWorkspaceRoot(__dirname);
       const packageREADMEPath = resolve(__dirname, "../README.md");

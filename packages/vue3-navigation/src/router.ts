@@ -85,10 +85,8 @@ export function useRouter(): Router {
     const toPageViews = unref(getRouter(toPageDept));
     if (toPageViews) {
       const index = toPageViews.findIndex((pageName) => pageName === name);
-      if (canOperatePage(name as string, index)) {
-        if (index > -1) {
-          toPageViews.splice(index, 1);
-        }
+      if (index > -1 && canOperatePage(name as string, toPageDept)) {
+        toPageViews.splice(index, 1);
       }
     }
   };

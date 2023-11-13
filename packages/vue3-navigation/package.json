@@ -1,6 +1,6 @@
 {
   "name": "vue3-navigation",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "这是一个基于 Vue 3 的 KeepAlive 实现的路由页面导航系统，支持前进刷新和后退缓存",
   "main": "./dist/vue3-navigation.mjs",
   "types": "./dist/index.d.ts",
