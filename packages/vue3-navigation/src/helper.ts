@@ -10,7 +10,7 @@ export function isFunction<T = any>(
 
 export function NOOP() {}
 
-export function hasBubbleProvide(): Omit<ProvideTypes, "props"> {
+export function hasBubbleProvide(): ProvideTypes {
   const ctx = getCurrentInstance()!;
   if ((ProvidePageKeepAliveKey as symbol) in ctx.parent!.provides) {
     return ctx.parent?.provides[ProvidePageKeepAliveKey as symbol];

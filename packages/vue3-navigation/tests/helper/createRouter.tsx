@@ -3,7 +3,6 @@ import {
   Router,
   createMemoryHistory,
   createRouter,
-  createWebHistory,
 } from "vue-router";
 export function createSimpleRouter(routes: Array<RouteRecordRaw> = []): Router {
   return createRouter({
