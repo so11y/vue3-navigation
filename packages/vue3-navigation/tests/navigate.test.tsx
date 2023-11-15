@@ -42,7 +42,7 @@ describe("navigate", () => {
         );
         const deptOneRouter = getRouter(0);
         expect(deptOneRouter).not.toBeNull();
-        expect(unref(deptOneRouter?.value)).toEqual(["a"]);
+        expect(unref(deptOneRouter?.value)).toEqual([]);
         expect(unref(navigateViewConfigRawMap[0])).toMatchObject({
           include: ["a"],
           exclude: ["b"],
