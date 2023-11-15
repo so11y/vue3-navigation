@@ -2,6 +2,10 @@
 
 这是一个基于 Vue 3 的 KeepAlive 实现的路由页面导航系统，支持前进刷新和后退缓存。
 
+
+### 在线体验
+
+点击 [stackblitz](https://stackblitz.com/github/so11y/vue3-navigation).
 ## 功能特性
 
 - 前进刷新
